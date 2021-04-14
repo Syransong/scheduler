@@ -108,7 +108,7 @@ storiesOf("InterviewerListItem", module)
       id={value.id}
       name={value.name}
       avatar={value.avatar}
-      onChange={event => action("setInterviewer")(value.id)}
+      onChange={event => action("onChange")(value.id)}
     />
   ));
 

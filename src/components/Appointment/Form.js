@@ -13,20 +13,16 @@ export default function Form(props) {
         <form autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
-            name={name}
+            value={name}
             type="text"
             placeholder="Enter Student Name"
             onChange={event => setName(event.target.value)}
-            /*
-              This must be a controlled component
-            */
           />
         </form>
         <InterviewerList 
           interviewers={props.interviewers} 
           value={interviewer} 
           onChange={setInterviewer} 
-          // setInterviewer={event => props.setInterviewer(interviewer.id)}
         />
       </section>
       <section className="appointment__card-right">
