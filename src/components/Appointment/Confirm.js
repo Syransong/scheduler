@@ -13,8 +13,3 @@ export default function Confirm(props) {
     </main>
    );
 }
-
-//accepts the following props
-// message string
-// onConfirm functoin 
-// onCancel function 
