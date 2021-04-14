@@ -9,7 +9,17 @@ export default function Appointment(props) {
  
   return (
     <article className="appointment">
-
+      <Header time={props.time}/>
+      {props.interview
+        ? <Show
+            student={props.interview.student}
+            interviewer={props.interview.interviewer}
+          />
+        : <Empty />
+      }
     </article>
    );
 }
+
+// last appointment should only show the time in the header 
+// if (props.interview) {render the Show component } if not, then render Empty 
