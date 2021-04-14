@@ -78,7 +78,7 @@ storiesOf("DayList", module)
   ));
 
 // Stories for InterviewerListItem
-const interviewer = {
+const value = {
   id: 1,
   name: "Sylvia Palmer",
   avatar: "https://i.imgur.com/LpaY82x.png"
@@ -90,25 +90,25 @@ storiesOf("InterviewerListItem", module)
   })
   .add("Unselected", () => (
     <InterviewerListItem
-      id={interviewer.id}
-      name={interviewer.name}
-      avatar={interviewer.avatar}
+      id={value.id}
+      name={value.name}
+      avatar={value.avatar}
     />
   ))
   .add("Selected", () => (
     <InterviewerListItem
-      id={interviewer.id}
-      name={interviewer.name}
-      avatar={interviewer.avatar}
+      id={value.id}
+      name={value.name}
+      avatar={value.avatar}
       selected
     />
   ))
   .add("Clickable", () => (
     <InterviewerListItem
-      id={interviewer.id}
-      name={interviewer.name}
-      avatar={interviewer.avatar}
-      setInterviewer={event => action("setInterviewer")(interviewer.id)}
+      id={value.id}
+      name={value.name}
+      avatar={value.avatar}
+      onChange={event => action("setInterviewer")(value.id)}
     />
   ));
 
@@ -128,14 +128,14 @@ storiesOf("InterviewerList", module)
   .add("Initial", () => (
     <InterviewerList
       interviewers={interviewers}
-      setInterviewer={action("setInterviewer")}
+      setInterviewer={action("onChange")}
     />
   ))
   .add("Preselected", () => (
     <InterviewerList
       interviewers={interviewers}
-      interviewer={3}
-      setInterviewer={action("setInterviewer")}
+      value={3}
+      setInterviewer={action("onChange")}
     />
   ));
 
