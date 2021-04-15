@@ -1,4 +1,4 @@
-export default function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   const result = [];
   const aptID = [];
 
@@ -18,3 +18,11 @@ export default function getAppointmentsForDay(state, day) {
   }
   return result;
 };
+
+function getInterview(state, interview){
+  if (!interview) {
+    return null;
+  }
+
+}
+export default { getAppointmentsForDay, getInterview} ;
