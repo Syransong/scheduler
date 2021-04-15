@@ -59,6 +59,14 @@ export default function Application(props) {
     // appointments: {}
   })
 
+  const setDay = day => {
+    setState({...state, day})
+  };
+
+  const setDays = (days) => {
+    setState(prev => ({ ...prev, days }));
+  };
+
   useEffect(() => {
     const DaysAPIUrl = "http://localhost:8001/api/days"
     
