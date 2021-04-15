@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 
 export default function useVisualMode (initial) {
+
   const [mode, setMode] = useState(initial);
+  const [history, setHistory] = useState([initial]);
+
+  function transition (nextMode) {
+    setMode(nextMode);
+    setHistory(prevMode => [...prevMode, nextMode]); //spread the history and add the next mode in history 
+  };
   
-  return {mode};
+  function back () {
+    console.log("history", history);
+    history.pop();
+    console.log("history", history);
+    setMode(history[history.length - 1]);
+  }
+  return {mode, transition, back};
 };
 
 //take in an intial mode ex. empty, show, create/edit, saving/deleting, confirm  
