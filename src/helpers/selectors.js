@@ -19,10 +19,14 @@ function getAppointmentsForDay(state, day) {
   return result;
 };
 
+// returns an object iwth the interviewer data 
 function getInterview(state, interview){
   if (!interview) {
     return null;
   }
-
+  // returns an object with the interviewer data 
+  let result = {};
+  
+  return result;
 }
-export default { getAppointmentsForDay, getInterview} ;
+export { getAppointmentsForDay, getInterview} ;
