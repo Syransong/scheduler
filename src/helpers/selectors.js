@@ -20,12 +20,26 @@ function getAppointmentsForDay(state, day) {
 };
 
 // returns an object iwth the interviewer data 
+// interivew = appointment.interview which is an object containing student and interviewer {student, interviewer}
 function getInterview(state, interview){
   if (!interview) {
     return null;
   }
-  // returns an object with the interviewer data 
-  let result = {};
+  // returns an object with the interviewer data (student and interview info)
+  let result = {}; // student : "", interviewer: { id, name, avatar }
+  const interviewers = state.interviewers;
+  const interviewerID = interview.interviewer;
+
+  for (let interviewer in interviewers) {
+    if (interviewerID === interviewers[interviewer].id) {
+
+      result = {
+        ...interview, // copies student and interviewer info 
+        interviewer: {...interviewers[interviewer]}
+      }
+    }
+  }
+  // result.push(interview.student);
   
   return result;
 }
