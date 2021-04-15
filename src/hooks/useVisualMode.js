@@ -12,9 +12,11 @@ export default function useVisualMode (initial) {
   
   function back () {
     console.log("history", history);
-    history.pop();
-    console.log("history", history);
-    setMode(history[history.length - 1]);
+    if (history.length > 1) {
+      history.pop();
+      console.log("popped history", history);
+      setMode(history[history.length - 1]);
+    }
   }
   return {mode, transition, back};
 };
