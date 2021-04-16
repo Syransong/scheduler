@@ -9,21 +9,22 @@ import useVisualMode from "hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 
+const { mode, transition, back } = useVisualMode(
+  props.interview ? SHOW : EMPTY
+);
+
 export default function Appointment(props) {
  
   return (
     <article className="appointment">
       <Header time={props.time}/>
-      {props.interview
-        ? <Show
-            student={props.interview.student}
-            interviewer={props.interview.interviewer.name}
-          />
-        : <Empty />
-      }
+      {mode === EMPTY && <Empty onAdd={() => console.log("Clicked onAdd")} />}
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+        />
+      )}  
     </article>
    );
 }
-
-// last appointment should only show the time in the header 
-// if (props.interview) {render the Show component } if not, then render Empty 
