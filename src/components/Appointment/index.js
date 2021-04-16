@@ -22,7 +22,9 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-
+    // console.log("props", props)
+    // console.log("id", props.id);
+    console.log("interview..........", interview)
     props.bookInterview(props.id, interview);
     transition(SHOW);
   };
@@ -34,7 +36,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer.name}
+          interviewer={props.interview.interviewer}
         />
       )}
       {mode === CREATE && (

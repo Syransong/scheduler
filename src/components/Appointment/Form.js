@@ -12,6 +12,14 @@ export default function Form(props) {
     setInterviewer(null);
   };
 
+  const handleSubmit = () => {
+    // console.log("interviewers", props.interviewers);
+    const interviewerObj = props.interviewers.filter(x => x.id === interviewer)
+    // console.log("ka;jfdf;jd", interviewerObj);
+    props.onSave(name, interviewerObj[0])
+
+  }
+  
   const cancel = () => {
     reset();
     props.onCancel();
@@ -37,8 +45,9 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
+          NAME {name}
           <Button danger onClick={() => cancel()}>Cancel</Button>
-          <Button confirm onClick={props.onSave}> Save</Button>
+          <Button confirm onClick={handleSubmit}> Save</Button>
         </section>
       </section>
     </main>
