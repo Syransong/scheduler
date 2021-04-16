@@ -46,11 +46,11 @@ function getInterviewersForDay(state, day) {
   const aptID = [];
 
   const aptDays = state.days;
-  const apts = state.appointments;
+  const apts = state.interviewers;
 
   for (let dayObj of aptDays) {
     if (dayObj.name === day) {
-      aptID.push(...dayObj.appointments);
+      aptID.push(...dayObj.interviewers);
     }
   }
 
