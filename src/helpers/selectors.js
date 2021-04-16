@@ -41,4 +41,25 @@ function getInterview(state, interview){
   return result;
 }
 
-export { getAppointmentsForDay, getInterview} ;
+function getInterviewersForDay(state, day) {
+  const result = [];
+  const aptID = [];
+
+  const aptDays = state.days;
+  const apts = state.appointments;
+
+  for (let dayObj of aptDays) {
+    if (dayObj.name === day) {
+      aptID.push(...dayObj.appointments);
+    }
+  }
+
+  for (let key in apts) {
+    if (aptID.includes(apts[key].id)) {
+      result.push(apts[key]);
+    }
+  }
+  return result;
+};
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay } ;
