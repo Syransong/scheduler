@@ -21,6 +21,24 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+
+    const appointment = { 
+      ...state.appointments[id],
+      interview: { ...interview}
+    }
+    
+    const appointments = {
+      ...state.appointments, 
+      [id]: appointment
+    }
+    setState({
+      ...state,
+      appointments
+    })
+  }
+
   useEffect(() => {
     const baseURL = "http://localhost:8001/api";
     
@@ -69,6 +87,7 @@ export default function Application(props) {
             {...appointment}
             interview={interview}
             interviewers={dailyInterviewers}
+            bookInterview={bookInterview}
           />
         })}
         <Appointment key="last" time="5pm" />
