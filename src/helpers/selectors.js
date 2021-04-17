@@ -27,8 +27,8 @@ function getInterview(state, interview){
   let result = {};
   const interviewers = state.interviewers;
   const interviewerID = interview.interviewer;
-  console.log("interviewers", interviewers);
-  console.log({interviewerID});
+  // console.log("interviewers", interviewers);
+  // console.log({interviewerID});
 
   for (let interviewer in interviewers) {
     if (interviewerID === interviewers[interviewer].id) {

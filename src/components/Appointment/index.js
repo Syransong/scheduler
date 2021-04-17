@@ -20,13 +20,24 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer: interviewer.id
+      interviewer: interviewer
     };
-    // console.log("props", props)
-    // console.log("id", props.id);
-    console.log("interview..........", interview)
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    
+    console.log("name", interview.student);
+    console.log("interviewer", interviewer);
+    console.log("props.id", props.id);
+    console.log("interview", interview); 
+    console.log("props", props);
+    console.log("props name", props.name);
+    console.log("props.interview", props.interview);
+    // console.log("props.interview.student", props.interview.student);
+    // {student: student_name, interviewer: 6 (interviewer id)}
+    //insterivewr returns an object containing interviewer id, name and avatar URL 
+    //getting error that cannot readproperty student of null from <SHOW student={props.interview.student}
+
+    //props.id is the id of that particular day ex. Monday at 2pm would have an id of 2
+    Promise.resolve(props.bookInterview(props.id, interview))
+      .then(transition(SHOW))
   };
 
   return (
@@ -45,7 +56,7 @@ export default function Appointment(props) {
           onCancel={() => back()}
           onSave={save}
         />
-      )}  
+      )} 
     </article>
    );
 }

@@ -13,15 +13,17 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   })
-  console.log("state", state);
+  // console.log("state", state);
 
   const setDay = day => {
     setState({...state, day})
   };
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  console.log("dailyAppointments", dailyAppointments);
+  // console.log("dailyAppointments", dailyAppointments);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
+
+  const baseURL = "http://localhost:8001/api";
 
   function bookInterview(id, interview) {
     console.log(id, interview);
@@ -29,10 +31,6 @@ export default function Application(props) {
     const appointment = { 
       ...state.appointments[id],
       interview: { ...interview }
-      // interview: { 
-      //   interviewer: interviewer.id, 
-      //   student
-      // }
     }
     
     const appointments = {
@@ -40,22 +38,28 @@ export default function Application(props) {
       [id]: appointment
     }
 
-    setState({
-      ...state,
-      appointments
-    })
+    console.log("interviewOBJ", {interview})
 
-    console.log("appointments", appointments);
-    
+    axios
+      .put(`appointments/${id}`, {interview})
+      .then(
+        setState({
+          ...state,
+          appointments
+        })
+      )
+      .catch(err => console.log(err))
   }
 
   useEffect(() => {
-    const baseURL = "http://localhost:8001/api";
     
     Promise.all([
-      axios.get(`${baseURL}/days`),
-      axios.get(`${baseURL}/appointments`),
-      axios.get(`${baseURL}/interviewers`)
+      // axios.get(`${baseURL}/days`),
+      // axios.get(`${baseURL}/appointments`),
+      // axios.get(`${baseURL}/interviewers`)
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers")
     ]).then((all) => {
       console.log(all);
       setState(prev=> ({
