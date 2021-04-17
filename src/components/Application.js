@@ -51,6 +51,22 @@ export default function Application(props) {
       .catch(err => console.log(err))
   }
 
+  function cancelInterview(id, interview) {
+    const appointment = { 
+      ...state.appointments[id],
+      interview: null
+    }
+    
+    const appointments = {
+      ...state.appointments, 
+      [id]: appointment
+    }
+
+    setState({
+      ...state,
+      appointments
+    })
+  }
   useEffect(() => {
     
     Promise.all([
@@ -103,6 +119,7 @@ export default function Application(props) {
             interview={interview}
             interviewers={dailyInterviewers}
             bookInterview={bookInterview}
+            cancelInterview={cancelInterview}
           />
         })}
         <Appointment key="last" time="5pm" />
