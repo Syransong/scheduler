@@ -20,7 +20,7 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer: interviewer.id
     };
     // console.log("props", props)
     // console.log("id", props.id);
