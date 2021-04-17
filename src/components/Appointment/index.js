@@ -20,10 +20,10 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
  
-  function save(name, interviewer) {
+  function onSave(name, interviewer) {
     const interview = {
       student: name,
-      interviewer: interviewer
+      interviewer: interviewer.id
     };
     
     console.log("name", interview.student);
@@ -40,8 +40,8 @@ export default function Appointment(props) {
 
     transition(SAVING);
     //props.id is the id of that particular day ex. Monday at 2pm would have an id of 2
-    // Promise.resolve(props.bookInterview(props.id, interview))
-    //   .then(transition(SHOW))
+    Promise.resolve(props.bookInterview(props.id, interview))
+      .then(transition(SHOW))
   };
 
   function onDelete(name, interviewer) {
@@ -70,7 +70,7 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={save}
+          onSave={onSave}
         />
       )}
       {mode === SAVING && <Status message="Saving!"/>}

@@ -43,7 +43,7 @@ export default function Application(props) {
     axios
       .put(`appointments/${id}`, {interview})
       .then(
-        setState({
+        setState({ 
           ...state,
           appointments
         })
@@ -70,12 +70,12 @@ export default function Application(props) {
   useEffect(() => {
     
     Promise.all([
-      // axios.get(`${baseURL}/days`),
-      // axios.get(`${baseURL}/appointments`),
-      // axios.get(`${baseURL}/interviewers`)
-      axios.get("/api/days"),
-      axios.get("/api/appointments"),
-      axios.get("/api/interviewers")
+      axios.get(`${baseURL}/days`),
+      axios.get(`${baseURL}/appointments`),
+      axios.get(`${baseURL}/interviewers`)
+      // axios.get("/api/days"),
+      // axios.get("/api/appointments"),
+      // axios.get("/api/interviewers")
     ]).then((all) => {
       console.log(all);
       setState(prev=> ({
