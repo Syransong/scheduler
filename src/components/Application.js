@@ -41,7 +41,7 @@ export default function Application(props) {
     console.log("interviewOBJ", {interview})
 
     axios
-      .put(`appointments/${id}`, {interview})
+      .put(`api/appointments/${id}`, {interview})
       .then(
         setState({ 
           ...state,
@@ -62,10 +62,22 @@ export default function Application(props) {
       [id]: appointment
     }
 
-    setState({
-      ...state,
-      appointments
-    })
+    //delete locally
+    // setState({
+    //   ...state,
+    //   appointments
+    // })
+
+    // delete in the database
+    axios
+      .put(`api/appointments/${id}`, {interview})
+      .then(
+        setState({ 
+          ...state,
+          appointments
+        })
+      )
+      .catch(err => console.log(err))
   }
   useEffect(() => {
     

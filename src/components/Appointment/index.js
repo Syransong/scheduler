@@ -41,7 +41,8 @@ export default function Appointment(props) {
     transition(SAVING);
     //props.id is the id of that particular day ex. Monday at 2pm would have an id of 2
     Promise.resolve(props.bookInterview(props.id, interview))
-      .then(transition(SHOW))
+      .then(() => transition(SHOW))
+      .catch((err) => console.log(err))
   };
 
   function onDelete(name, interviewer) {
@@ -53,7 +54,8 @@ export default function Appointment(props) {
     transition(DELETING);
 
     Promise.resolve(props.cancelInterview(props.id, interview))
-      .then(transition(EMPTY));
+      .then(transition(EMPTY))
+      .catch((err) => console.log(err))
   }
   return (
     <article className="appointment">
