@@ -70,13 +70,13 @@ export default function Application(props) {
 
     // delete in the database
     return axios
-      .delete(`api/appointments/${id}`, {interview: null})
-      .then(
+      .delete(`api/appointments/${id}`, {})
+      .then((res) => {
         setState({ 
           ...state,
           appointments
         })
-      )
+      })
       .catch(err => console.log(err))
   }
   useEffect(() => {
