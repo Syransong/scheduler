@@ -40,7 +40,7 @@ export default function Application(props) {
 
     console.log("interviewOBJ", {interview})
 
-    axios
+    return axios
       .put(`api/appointments/${id}`, {interview})
       .then(
         setState({ 
@@ -69,7 +69,7 @@ export default function Application(props) {
     // })
 
     // delete in the database
-    axios
+    return axios
       .delete(`api/appointments/${id}`, {interview: null})
       .then(
         setState({ 
