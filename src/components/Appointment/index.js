@@ -46,10 +46,10 @@ export default function Appointment(props) {
   };
 
   function onDelete(name, interviewer) {
-    const interview = {
-      student: name, 
-      interviewer: interviewer
-    }
+    // const interview = {
+    //   student: name, 
+    //   interviewer: interviewer
+    // }
 
     transition(DELETING, true);
 
