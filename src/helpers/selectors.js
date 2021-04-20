@@ -64,4 +64,46 @@ function getInterviewersForDay(state, day) {
   return result;
 };
 
-export { getAppointmentsForDay, getInterview, getInterviewersForDay } ;
+// function getSpotsforDay (dayObj, appointments) {
+//   let spots = 0;
+
+//   console.log("dayObj", dayObj);
+//   console.log("appointments", appointments);
+//   for (let id of dayObj.appointments) {
+//     const appointment = appointments[id];
+//     if (!appointment.interview) {
+//       spots++;
+//     }
+//   }
+
+//   return spots;
+// };
+
+// function updateSpots (dayName, days, appointments) {
+//   //Find the day Object 
+//   const dayObj = days.find(day => day.name === dayName);
+//   console.log("dayObj", dayObj)
+
+//   //Calculate the number of spots for this day
+//   const spots = getSpotsforDay(dayObj, appointments);
+//   console.log("spots", spots);
+
+//   const newDay = { ...dayObj, spots};
+//   console.log("newDay", newDay);
+
+//   const newDays = days.map(day => day.name === dayName ? newDay : day);
+//   console.log("newDays", newDays);
+  
+//   return newDays;
+// }
+
+function updateSpots (days, id, value) {
+  days.forEach(day => {
+    if (day.appointments.includes(id)) {
+      day.spots += value
+    }
+  })
+  return days;
+}
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay, updateSpots } ;
