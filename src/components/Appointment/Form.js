@@ -13,17 +13,14 @@ export default function Form(props) {
   };
 
   const handleSubmit = () => {
-    // console.log("interviewers", props.interviewers);
     const interviewerObj = props.interviewers.filter(x => x.id === interviewer)
-    // console.log("ka;jfdf;jd", interviewerObj);
     props.onSave(name, interviewerObj[0])
-
-  }
+  };
 
   const cancel = () => {
     reset();
     props.onCancel();
-  }
+  };
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -35,6 +32,7 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             onChange={event => setName(event.target.value)}
+            data-testid="student-name-input"
           />
         </form>
         <InterviewerList 
