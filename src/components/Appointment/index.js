@@ -34,18 +34,15 @@ export default function Appointment(props) {
     
     // {student: student_name, interviewer: 6 (interviewer id)}
     //insterivewr returns an object containing interviewer id, name and avatar URL 
-    //getting error that cannot readproperty student of null from <SHOW student={props.interview.student}
 
     transition(SAVING);
     //props.id is the id of that particular day ex. Monday at 2pm would have an id of 2
-    // Promise.resolve(props.bookInterview(props.id, interview))
-    //   .then(() => transition(SHOW))
-    //   .catch((err) => console.log(err))
     
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true))
+      .catch((err) => transition(ERROR_SAVE, true))
+
   };
 
   function onDelete(name, interviewer) {
@@ -56,7 +53,8 @@ export default function Appointment(props) {
 
     transition(DELETING, true);
 
-    props.cancelInterview(props.id)
+    props
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true))
   }
@@ -85,7 +83,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm 
           message="Are you sure you would like to delete?"
-          onCancel={() => back()} //can just change to back()?
+          onCancel={back} //can just change to back()?
           onConfirm={onDelete} //call it with an argument onDelete()
         />
       )}
@@ -94,20 +92,20 @@ export default function Appointment(props) {
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          onCancel={back}
           onSave={onSave}
         />
       )}
       {mode === ERROR_SAVE && (
         <Error 
           message="Could not save appointment, sorry :("
-          onClose={() => back()}
+          onClose={back}
         />
       )}
       {mode === ERROR_DELETE && (
         <Error 
           message="Could not delete appointment, sorry :("
-          onClose={() => back()}
+          onClose={back}
         />
       )}
     </article>
