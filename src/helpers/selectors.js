@@ -70,7 +70,7 @@ function countSpots (dayObj, appointments) {
 
   // console.log("dayObj", dayObj);
   // console.log("appointments", appointments);
-  for (let id of dayObj.appointments) {
+  for (const id of dayObj.appointments) {
     const appointment = appointments[id];
     if (!appointment.interview) {
       spotsCounter++;
@@ -93,10 +93,16 @@ function updateSpots (dayName, days, appointments) {
   // console.log("newDay", newDay);
 
   const newDays = days.map(day => day.name === dayName ? newDay : day);
-  console.log("newDays", newDays);
+  // const newDays = days.map(day => {
+  //   if (day.name === dayName) {
+  //     return {...day, spots}
+  //   }
+  //   return day;
+  // })
+  // console.log("newDays", newDays);
   
   // if
   return newDays;
 }
 
-export { getAppointmentsForDay, getInterview, getInterviewersForDay, updateSpots } ;
+export { getAppointmentsForDay, getInterview, getInterviewersForDay, updateSpots };

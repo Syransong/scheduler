@@ -50,7 +50,7 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true))
   }
-
+  
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time}/>
