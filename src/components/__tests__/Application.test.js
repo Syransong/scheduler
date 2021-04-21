@@ -89,7 +89,7 @@ describe("Application", () => {
     
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
     
-    debug();
+    // debug();
   });
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async() => {
@@ -131,9 +131,40 @@ describe("Application", () => {
 
   it("shows the save error when failing to save an appointment", () => {
     axios.put.mockRejectedValueOnce();
+    // 1. Render the Application 
+    // 2. Wait until the text "Archie Cohen" is displayed.
+    // 3. Click plus button so Create form is shown
+    // 4. Enter Student Name and select Interviewer 
+    // 5. Click Save Button
+    // 6. Show Saving! Transition
+    // 7. Error_Save message appears 
+    // 8. Click on close button 
+    // 9. Empty Create form is shown 
+    // 10. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+    
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+    debug();
   });
 
   it("shows the delete error when failing to delete an existing appointment", () => {
-    axios.put.mockRejectedValueOnce();
+    axios.delete.mockRejectedValueOnce();
+    // 1. Render the Application 
+    // 2. Wait until the text "Archie Cohen" is displayed.
+    // 3. Find Appointment to Delete
+    // 5. Click Delete Button
+    // 6. Show Delete! Transition
+    // 7. Error_Delete message appears 
+    // 8. Click on close button 
+    // 9. Appointment is shown with all details
+    // 10. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+    
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+    debug();
   });
 });
