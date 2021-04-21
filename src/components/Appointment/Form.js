@@ -14,7 +14,7 @@ export default function Form(props) {
   };
 
   // console.log("name", name);
-  console.log("interviwer", interviewer)
+  // console.log("interviwer", interviewer)
   // console.log(interviewer);
   // const handleSubmit = () => {
   //   const interviewerObj = props.interviewers.filter(x => x.id === interviewer)
