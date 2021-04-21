@@ -1,6 +1,6 @@
 import React from "react";
 
-import { waitForElement, fireEvent, render, cleanup, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
+import { waitForElement, fireEvent, render, cleanup, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -61,21 +61,25 @@ describe("Application", () => {
     
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
-    
-    const appointments = getAllByTestId(container, "appointment");
-    const appointment = getAllByTestId(container, "appointment")[0];
-    
+      
     // 3. Click the "Delete" button on the appointment.
-    fireEvent.click(getByAltText(appointment, "Delete"));
-    
+    const appointment = getAllByTestId(container, "appointment").find(
+      appointment => queryByText(appointment, "Archie Cohen")
+    );
+  
+    fireEvent.click(queryByAltText(appointment, "Delete"));
+    debug();
     // 4. Ensure that the confirmation window displays 
+    expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
 
     // 5. Click the confirm button
+    fireEvent.click(getByText(appointment, "Confirm"));
 
     // 6. Ensure that the deleting status window displays with Deleting! message 
+    expect(getByText(appointment, "Deleting!")).toBeInTheDocument();
 
     // 7. Wait until the element with the Add button is displayed.
-    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+    await waitForElement(() => getByAltText(appointment, "Add"));
 
     // 8. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
     const day = getAllByTestId(container, "day").find(day =>
@@ -84,5 +88,6 @@ describe("Application", () => {
     
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
     
+    debug();
   });
 });
