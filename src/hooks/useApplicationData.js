@@ -30,15 +30,15 @@ export default function useApplicationData() {
     const days = updateSpots(state.day, state.days, appointments);
 
     return axios
-      .put(`api/appointments/${id}`, {interview})
-      .then(
+      .put(`/api/appointments/${id}`, {interview})
+    .then(res => {
         setState({ 
           ...state,
           appointments,
           days
         })
-      )
-      .catch(err => console.log(err))
+      })
+      // .catch(err => console.log(err))
   }
 
   // Cancel Interview Function
@@ -56,7 +56,7 @@ export default function useApplicationData() {
     const days = updateSpots(state.day, state.days, appointments);
 
     return axios
-      .delete(`api/appointments/${id}`, {})
+      .delete(`/api/appointments/${id}`, {})
       .then((res) => {
         setState({ 
           ...state,
@@ -64,7 +64,7 @@ export default function useApplicationData() {
           days
         })
       })
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
     };
 
     // const baseURL = "http://localhost:8001/api";

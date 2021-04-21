@@ -129,17 +129,43 @@ describe("Application", () => {
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 
-  it("shows the save error when failing to save an appointment", () => {
+  it("shows the save error when failing to save an appointment", async() => {
     axios.put.mockRejectedValueOnce();
-    // 1. Render the Application 
+    // 1. Render the Application.
+    const { container, debug } = render(<Application />);
+
     // 2. Wait until the text "Archie Cohen" is displayed.
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
     // 3. Click plus button so Create form is shown
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments[0];
+    
+    // 3. Click the "Add" button on the first empty appointment.
+    fireEvent.click(getByAltText(appointment, "Add"));
+
     // 4. Enter Student Name and select Interviewer 
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Jason Mason" }
+    });
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
     // 5. Click Save Button
+    fireEvent.click(getByText(appointment, "Save"));
+
     // 6. Show Saving! Transition
+    expect(getByText(appointment, "Saving!")).toBeInTheDocument();
+
     // 7. Error_Save message appears 
+    await waitForElement(() => getByText(appointment, "Error"));
+    expect(getByText(appointment, "Could not save appointment, sorry :(")).toBeInTheDocument();
+   
     // 8. Click on close button 
-    // 9. Empty Create form is shown 
+    fireEvent.click(getByAltText(appointment, "Close"));
+
+    // 9. Create form is shown with previously inputted details
+    expect(getByText(appointment, "Cancel") && getByText(appointment, "Save")).toBeInTheDocument();
+
     // 10. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")
@@ -149,7 +175,7 @@ describe("Application", () => {
     debug();
   });
 
-  it("shows the delete error when failing to delete an existing appointment", () => {
+  xit("shows the delete error when failing to delete an existing appointment", () => {
     axios.delete.mockRejectedValueOnce();
     // 1. Render the Application 
     // 2. Wait until the text "Archie Cohen" is displayed.
@@ -165,6 +191,6 @@ describe("Application", () => {
     );
     
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
-    debug();
+    // debug();
   });
 });
