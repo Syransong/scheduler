@@ -32,11 +32,7 @@ export default function Appointment(props) {
       interviewer: interviewer
     };
     
-    // {student: student_name, interviewer: 6 (interviewer id)}
-    //insterivewr returns an object containing interviewer id, name and avatar URL 
-
     transition(SAVING);
-    //props.id is the id of that particular day ex. Monday at 2pm would have an id of 2
     
     props
       .bookInterview(props.id, interview)
@@ -46,11 +42,7 @@ export default function Appointment(props) {
   };
 
   function onDelete(name, interviewer) {
-    // const interview = {
-    //   student: name, 
-    //   interviewer: interviewer
-    // }
-
+   
     transition(DELETING, true);
 
     props
@@ -63,7 +55,7 @@ export default function Appointment(props) {
     <article className="appointment" data-testid="appointment">
       <Header time={props.time}/>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
