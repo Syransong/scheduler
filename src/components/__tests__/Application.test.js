@@ -68,7 +68,7 @@ describe("Application", () => {
     );
   
     fireEvent.click(queryByAltText(appointment, "Delete"));
-    debug();
+  
     // 4. Ensure that the confirmation window displays 
     expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
 
