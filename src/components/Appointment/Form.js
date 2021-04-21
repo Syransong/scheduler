@@ -13,6 +13,9 @@ export default function Form(props) {
     setInterviewer(null);
   };
 
+  // console.log("name", name);
+  console.log("interviwer", interviewer)
+  // console.log(interviewer);
   // const handleSubmit = () => {
   //   const interviewerObj = props.interviewers.filter(x => x.id === interviewer)
   //   props.onSave(name, interviewerObj[0])

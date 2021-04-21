@@ -29,7 +29,7 @@ export default function Appointment(props) {
   function onSave(name, interviewer) {
     const interview = {
       student: name,
-      interviewer: interviewer.id
+      interviewer: interviewer
     };
     
     // {student: student_name, interviewer: 6 (interviewer id)}
