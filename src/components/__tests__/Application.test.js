@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import { waitForElement, fireEvent, render, cleanup, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
 
@@ -126,5 +127,13 @@ describe("Application", () => {
     );
     
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  });
+
+  it("shows the save error when failing to save an appointment", () => {
+    axios.put.mockRejectedValueOnce();
+  });
+
+  it("shows the delete error when failing to delete an existing appointment", () => {
+    axios.put.mockRejectedValueOnce();
   });
 });
