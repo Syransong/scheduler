@@ -1,6 +1,6 @@
 import React from "react";
 
-import { waitForElement, fireEvent, render, cleanup, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
+import { waitForElement, fireEvent, render, cleanup, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -18,7 +18,7 @@ describe("Application", () => {
 
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
     //1. Render the Application
-    const { container } = render(<Application />);
+    const { container, debug } = render(<Application />);
     // console.log(container);
     
     // 2. Wait until the text "Archie Cohen" is displayed.
@@ -28,7 +28,6 @@ describe("Application", () => {
     // console.log(prettyDOM(appointments));
     
     const appointment = getAllByTestId(container, "appointment")[0];
-    console.log(prettyDOM(appointment));
     // 3. Click the "Add" button on the first empty appointment.
     fireEvent.click(getByAltText(appointment, "Add"));
     // 4. Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name".
@@ -39,8 +38,22 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     // 6. Click the "Save" button on that same appointment.
     fireEvent.click(getByText(appointment, "Save"));
+    // console.log(prettyDOM(appointment));
+    
     // 7. Check that the element with the text "Saving" is displayed.
+    expect(getByText(appointment, "Saving!")).toBeInTheDocument();
+
     // 8. Wait until the element with the text "Lydia Miller-Jones" is displayed.
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+
     // 9. Check that the DayListItem with the text "Monday" also has the text "no spots remaining".
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+    
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+
+    // console.log("prettyDom", prettyDOM(day));
+    
   });
 });
