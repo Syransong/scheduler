@@ -67,20 +67,20 @@ export default function useApplicationData() {
       .catch(err => console.log(err))
     };
 
-    const baseURL = "http://localhost:8001/api";
+    // const baseURL = "http://localhost:8001/api";
 
     // Fetch API 
     useEffect(() => {
     
       Promise.all([
-        axios.get(`${baseURL}/days`),
-        axios.get(`${baseURL}/appointments`),
-        axios.get(`${baseURL}/interviewers`)
-        // axios.get("/api/days"),
-        // axios.get("/api/appointments"),
-        // axios.get("/api/interviewers")
+        // axios.get(`${baseURL}/days`),
+        // axios.get(`${baseURL}/appointments`),
+        // axios.get(`${baseURL}/interviewers`)
+        axios.get("/api/days"),
+        axios.get("/api/appointments"),
+        axios.get("/api/interviewers")
       ]).then((all) => {
-        console.log(all);
+        // console.log(all);
         setState(prev=> ({
           ...prev,
           days: all[0].data,
