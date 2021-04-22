@@ -36,7 +36,7 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true))
+      .catch(() => transition(ERROR_SAVE, true));
 
   };
 
@@ -46,8 +46,8 @@ export default function Appointment(props) {
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(() => transition(ERROR_DELETE, true))
-  }
+      .catch(() => transition(ERROR_DELETE, true));
+  };
   
   return (
     <article className="appointment" data-testid="appointment">
@@ -100,4 +100,4 @@ export default function Appointment(props) {
       )}
     </article>
    );
-}
+};

@@ -51,14 +51,14 @@ function getInterviewersForDay(state, day) {
   for (let dayObj of aptDays) {
     if (dayObj.name === day) {
       aptID.push(...dayObj.interviewers);
-    }
-  }
+    };
+  };
 
   for (let key in apts) {
     if (aptID.includes(apts[key].id)) {
       result.push(apts[key]);
-    }
-  }
+    };
+  };
   return result;
 };
 
@@ -70,8 +70,8 @@ function countSpots (dayObj, appointments) {
     const appointment = appointments[id];
     if (!appointment.interview) {
       spotsCounter++;
-    }
-  }
+    };
+  };
   return spotsCounter;
 };
 
