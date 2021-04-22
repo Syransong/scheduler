@@ -3,7 +3,6 @@ import Button from "../Button";
 import InterviewerList from "../InterviewerList";
 
 export default function Form(props) {
-
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
@@ -12,14 +11,6 @@ export default function Form(props) {
     setName("");
     setInterviewer(null);
   };
-
-  // console.log("name", name);
-  // console.log("interviwer", interviewer)
-  // console.log(interviewer);
-  // const handleSubmit = () => {
-  //   const interviewerObj = props.interviewers.filter(x => x.id === interviewer)
-  //   props.onSave(name, interviewerObj[0])
-  // };
 
   const cancel = () => {
     reset();
@@ -36,11 +27,10 @@ export default function Form(props) {
       setError("Please select an interviewer");
       return;
     }
-    
+
     setError("");
     props.onSave(name, interviewer);
-    // handleSubmit();
-  }
+  };
   
   return (
     <main className="appointment__card appointment__card--create">
@@ -70,4 +60,4 @@ export default function Form(props) {
       </section>
     </main>
    );
-}
+};
